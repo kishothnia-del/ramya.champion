@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Ramya 🌸🏆</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #17172b, #29295a);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .game {
+            width: 90%;
+            max-width: 520px;
+            text-align: center;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .big-emoji {
+            font-size: 90px;
+            margin-bottom: 20px;
+            animation: bounce 1.2s infinite;
+        }
+
+        .trophy {
+            font-size: 100px;
+            animation: trophy 1.5s infinite;
+            margin-bottom: 20px;
+        }
+
+        .dancing {
+            font-size: 90px;
+            animation: dance 0.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            font-size: 80px;
+            animation: heartbeat 1s infinite;
+        }
+
+        button {
+            border: none;
+            padding: 15px 28px;
+            border-radius: 30px;
+            background: #ffcf33;
+            color: #222;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 8px;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #score {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .target {
+            position: absolute;
+            font-size: 45px;
+            cursor: pointer;
+            user-select: none;
+            animation: pop 0.3s ease;
+        }
+
+        .final-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .small {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -30px;
+            font-size: 25px;
+            pointer-events: none;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes trophy {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+
+            50% {
+                transform: rotate(5deg) scale(1.1);
+            }
+        }
+
+        @keyframes dance {
+            from {
+                transform: rotate(-15deg) translateX(-10px);
+            }
+
+            to {
+                transform: rotate(15deg) translateX(10px);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game">
+
+        <!-- SCREEN 1 -->
+        <div class="screen active" id="screen1">
+
+            <div class="big-emoji">🚨</div>
+
+            <h1>WAITTTT RAMYA!!!</h1>
+
+            <p>
+                I just received some VERY important information...
+                👀
+            </p>
+
+            <button onclick="nextScreen(2)">
+                WHAT HAPPENED?! 👀
+            </button>
+
+        </div>
+
+
+        <!-- SCREEN 2 -->
+        <div class="screen" id="screen2">
+
+            <div class="trophy">🏆</div>
+
+            <h1>SECOND PLACE?!</h1>
+
+            <p>
+                EXCUSE ME?! 😭🔥
+                <br>
+                LOTUS ACTUALLY DID IT!!!
+            </p>
+
+            <button onclick="startGame()">
+                LET'S CELEBRATE! 🎉
+            </button>
+
+        </div>
+
+
+        <!-- SCREEN 3 -->
+        <div class="screen" id="screen3">
+
+            <div class="dancing">🕺</div>
+
+            <h2>CELEBRATION MODE!!!</h2>
+
+            <p>
+                Catch the trophies! 🏆
+                <br>
+                You need to catch 5 trophies
+                to unlock your surprise.
+            </p>
+
+            <div id="score">
+                Trophies: 0 / 5
+            </div>
+
+        </div>
+
+
+        <!-- SCREEN 4 -->
+        <div class="screen" id="screen4">
+
+            <div class="big-emoji">🎉</div>
+
+            <h1>YOU DID IT, LOTUS!!!</h1>
+
+            <p>
+                Achievement unlocked:
+            </p>
+
+            <h2>
+                🏆 SECOND PLACE CHAMPION 🏆
+            </h2>
+
+            <button onclick="nextScreen(5)">
+                OPEN YOUR PRIZE 🎁
+            </button>
+
+        </div>
+
+
+        <!-- SCREEN 5 -->
+        <div class="screen" id="screen5">
+
+            <div class="heart">❤️</div>
+
+            <h2>
+                A LITTLE MESSAGE FOR YOU
+            </h2>
+
+            <div class="final-message">
+
+                <p>
+                    Hey Lotus 🌸
+                </p>
+
+                <p>
+                    You worked so hard for this.
+                    And today, you finally got to see
+                    that all those efforts were worth it.
+                </p>
+
+                <h2>
+                    🏆 SECOND PLACE, BABY!!! 🏆
+                </h2>
+
+                <p>
+                    Don't spend today thinking about
+                    what you could have done better.
+                </p>
+
+                <p>
+                    Just smile.
+                    <br>
+                    Celebrate.
+                    <br>
+                    And be proud of yourself.
+                </p>
+
+                <p>
+                    Because you earned this.
+                    Every single bit of it. ❤️
+                </p>
+
+                <p>
+                    And yes...
+                    <br>
+                    <strong>
+                        I'm freaking proud of you, Lotus. 🥹
+                    </strong>
+                </p>
+
+                <p class="small">
+                    Now go enjoy your victory, champion.
+                    🏆🌸
+                </p>
+
+            </div>
+
+            <button onclick="celebrate()">
+                ONE LAST THING 🎉
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let score = 0;
+        let gameInterval;
+
+
+        // Change screens
+        function nextScreen(number) {
+
+            document
+                .querySelectorAll(".screen")
+                .forEach(function(screen) {
+                    screen.classList.remove("active");
+                });
+
+            document
+                .getElementById("screen" + number)
+                .classList.add("active");
+        }
+
+
+        // Start the trophy game
+        function startGame() {
+
+            score = 0;
+
+            document.getElementById("score").innerText =
+                "Trophies: 0 / 5";
+
+            nextScreen(3);
+
+            gameInterval = setInterval(
+                createTrophy,
+                800
+            );
+        }
+
+
+        // Create a trophy
+        function createTrophy() {
+
+            const trophy = document.createElement("div");
+
+            trophy.className = "target";
+
+            trophy.innerText = "🏆";
+
+            trophy.style.left =
+                Math.random() * 85 + "%";
+
+            trophy.style.top =
+                Math.random() * 80 + "%";
+
+
+            trophy.onclick = function() {
+
+                score++;
+
+                trophy.remove();
+
+                document.getElementById("score").innerText =
+                    "Trophies: " + score + " / 5";
+
+                createConfetti();
+
+
+                if (score >= 5) {
+
+                    clearInterval(gameInterval);
+
+                    setTimeout(function() {
+
+                        nextScreen(4);
+
+                        createConfetti();
+
+                    }, 500);
+                }
+            };
+
+
+            document.body.appendChild(trophy);
+
+
+            setTimeout(function() {
+
+                if (trophy.parentElement) {
+                    trophy.remove();
+                }
+
+            }, 1500);
+        }
+
+
+        // Create confetti
+        function createConfetti() {
+
+            const confetti =
+                document.createElement("div");
+
+            confetti.className = "confetti";
+
+
+            const emojis = [
+                "🎉",
+                "✨",
+                "🎊",
+                "💛",
+                "🏆",
+                "⭐",
+                "🌸"
+            ];
+
+
+            confetti.innerText =
+                emojis[
+                    Math.floor(
+                        Math.random() * emojis.length
+                    )
+                ];
+
+
+            confetti.style.left =
+                Math.random() * 100 + "vw";
+
+
+            document.body.appendChild(confetti);
+
+
+            setTimeout(function() {
+                confetti.remove();
+            }, 3000);
+        }
+
+
+        // Final celebration
+        function celebrate() {
+
+            for (let i = 0; i < 40; i++) {
+
+                setTimeout(function() {
+                    createConfetti();
+                }, i * 70);
+            }
+
+
+            setTimeout(function() {
+
+                alert(
+                    "🏆 YOU ARE AMAZING, LOTUS! ❤️\n\n" +
+                    "Now go celebrate your victory! 🌸"
+                );
+
+            }, 1000);
+        }
+
+    </script>
+
+</body>
+</html>
